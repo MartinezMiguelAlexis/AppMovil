@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object ApiClient {
-    private const val BASE_URL = "http://192.168.119.73:3000/" // Cambia por tu IP local o dominio
+    private const val BASE_URL = "http://1.1.1.1:3000/" // Cambia por tu IP local o dominio
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
