@@ -1,5 +1,6 @@
 package com.example.conexionapi.UI
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +10,7 @@ import com.example.conexionapi.data.ApiService
 import com.example.conexionapi.data.AuthResponse
 import com.example.conexionapi.data.LoginRequest
 import com.example.conexionapi.data.Producto
+import com.example.conexionapi.data.ProductoPagoRequest
 import com.example.conexionapi.data.ProductoRequest
 import com.example.conexionapi.data.RegistroRequest
 import kotlinx.coroutines.launch
@@ -25,6 +27,9 @@ class ProductosViewModel : ViewModel() {
 
     private val _productos = MutableLiveData<List<Producto>>()
     val productos: LiveData<List<Producto>> = _productos
+
+    private val _paymentUrl = MutableLiveData<String>()
+    val paymentUrl: LiveData<String> get() = _paymentUrl
 
     // Autenticación
     fun registrarUsuario(nombreUsuario: String, password: String) {
@@ -63,9 +68,11 @@ class ProductosViewModel : ViewModel() {
             try {
                 val response = apiService.obtenerProductos(token)
                 if (response.isSuccessful) {
+                    // Agrega este log para verificar los datos recibidos
+                    println("Datos recibidos: ${response.body()}")
                     _productos.postValue(response.body())
                 } else {
-                    _errorMessage.postValue("Error al obtener productos")
+                    _errorMessage.postValue("Error al obtener productos: ${response.errorBody()?.string()}")
                 }
             } catch (e: Exception) {
                 _errorMessage.postValue("Error de conexión: ${e.message}")
@@ -78,12 +85,12 @@ class ProductosViewModel : ViewModel() {
             try {
                 val response = apiService.crearProducto(token, producto)
                 if (response.isSuccessful) {
-                    obtenerProductos(token) // Actualizar lista
+                    obtenerProductos(token)
                 } else {
-                    _errorMessage.postValue("Error al crear producto")
+                    _errorMessage.postValue("Error al crear producto: ${response.errorBody()?.string()}")
                 }
             } catch (e: Exception) {
-                _errorMessage.postValue("Error de conexión: ${e.message}")
+                _errorMessage.postValue("Error: ${e.message}")
             }
         }
     }
@@ -122,5 +129,26 @@ class ProductosViewModel : ViewModel() {
             }
         }
     }
+
+    fun iniciarPago(token: String, productosSeleccionados: List<ProductoPagoRequest>) {
+        viewModelScope.launch {
+            try {
+                val request = ApiService.CrearSesionPagoRequest(productos = productosSeleccionados)
+
+                val response = apiService.crearSesionPago(token, request)
+                if (response.isSuccessful) {
+                    _paymentUrl.postValue(response.body()?.url)
+                    Log.d("PaymentFlow", "URL de pago: ${response.body()?.url}")
+                } else {
+                    _errorMessage.postValue("Error al crear pago: ${response.errorBody()?.string()}")
+                }
+            } catch (e: Exception) {
+                _errorMessage.postValue("Error: ${e.message}")
+                Log.e("PaymentFlow", "Error en iniciarPago", e)
+            }
+        }
+    }
+
+
 
 }

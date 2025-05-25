@@ -12,6 +12,13 @@
         android:hint="Nombre"/>
 
     <EditText
+        android:id="@+id/etPrecio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Precio"
+        android:inputType="numberDecimal"/>
+
+    <EditText
         android:id="@+id/etCantidad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

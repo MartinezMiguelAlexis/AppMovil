@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ConexionAPI</string>
+    <string name="payment_success">¡Pago exitoso!</string>
+    <string name="payment_failed">Pago fallido o cancelado</string>
 </resources>

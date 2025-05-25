@@ -6,8 +6,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-
-
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -17,26 +15,41 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="35"
-        android:usesCleartextTraffic="true"><!-- ¡Solo para desarrollo! -->
+        android:usesCleartextTraffic="true">
 
         <activity
-        android:name=".UI.LoginActivity"
-        android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
+            android:name=".UI.LoginActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".UI.ProductosActivity"
             android:exported="false"
             android:parentActivityName=".UI.LoginActivity">
-            <!-- Meta datos para la relación con la actividad padre -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".UI.LoginActivity" />
         </activity>
 
+        <activity
+            android:name=".UI.PagoResultActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Ejemplo para desarrollo con ngrok -->
+                <data
+                    android:scheme="https"
+                    android:host="a7bf-177-238-18-30.ngrok-free.app"
+                    android:pathPrefix="/exito" />
+            </intent-filter>
+        </activity>
     </application>
 </manifest>

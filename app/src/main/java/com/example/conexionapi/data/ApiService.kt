@@ -5,14 +5,14 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface ApiService {
-    // Autenticación
+    // Autenticación (existente)
     @POST("registro")
     suspend fun registrarUsuario(@Body request: RegistroRequest): Response<AuthResponse>
 
     @POST("login")
     suspend fun loginUsuario(@Body request: LoginRequest): Response<AuthResponse>
 
-    // Productos
+    // Productos (existente con precio añadido)
     @GET("productos")
     suspend fun obtenerProductos(@Header("Authorization") token: String): Response<List<Producto>>
 
@@ -40,18 +40,53 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("id") id: Int
     ): Response<Producto>
+
+    // Nuevos endpoints para pagos
+    @POST("crear-sesion-pago")
+    suspend fun crearSesionPago(
+        @Header("Authorization") token: String,
+        @Body request: CrearSesionPagoRequest
+    ): Response<PaymentResponse>
+
+    // Nueva clase para el cuerpo de la petición
+    data class CrearSesionPagoRequest(
+        val productos: List<ProductoPagoRequest>
+    )
+
+    @GET("verificar-pago/{sessionId}")
+    suspend fun verificarPago(
+        @Header("Authorization") token: String,
+        @Path("sessionId") sessionId: String
+    ): Response<PaymentStatus>
 }
 
-// Modelos de datos
+// Modelos existentes
 data class RegistroRequest(val nombreUsuario: String, val password: String)
 data class LoginRequest(val nombreUsuario: String, val password: String)
 data class AuthResponse(val token: String, val usuario: Usuario)
 
+
+// Nuevos modelos para pagos
+data class PaymentResponse(
+    val id: String,
+    val url: String,
+    val monto_total: Double
+)
+
+data class CrearSesionPagoRequest(
+    val productos: List<ProductoPagoRequest>
+)
+
+data class PaymentStatus(
+    val status: String,
+    val amount_total: Double
+)
+
 data class Usuario(
     val id: Int,
     val nombreUsuario: String,
-    @SerializedName("es_admin") val esAdminInt: Int  // Recibe 0 o 1
+    @SerializedName("es_admin") val esAdminInt: Int
 ) {
     val esAdmin: Boolean
-        get() = esAdminInt == 1  // Convierte a booleano cuando lo necesites
+        get() = esAdminInt == 1
 }

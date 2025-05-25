@@ -69,6 +69,12 @@ dependencies {
     implementation(libs.security.crypto)
     implementation(libs.androidx.appcompat)
     implementation(libs.google.material)
-    implementation("androidx.security:security-crypto:1.1.0-alpha03")
-    implementation("com.google.android.material:material:1.9.0")
+    implementation(libs.androidx.security.crypto.v110alpha07)
+    implementation(libs.material.v1120)
+
+    implementation (libs.stripe.android)
+    implementation (libs.androidx.browser)
+    implementation (libs.kotlinx.coroutines.android)
+
+
 }
