@@ -2,4 +2,17 @@
     <string name="app_name">ConexionAPI</string>
     <string name="payment_success">¡Pago exitoso!</string>
     <string name="payment_failed">Pago fallido o cancelado</string>
+    <string name="contrasenia">Contraseña</string>
+    <string name="nombre_de_usuario">Nombre de usuario</string>
+    <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="resumen_de_compra">Resumen de compra</string>
+    <string name="continuar_con_el_pago">Continuar con el pago</string>
+    <string name="volver_a_productos">Volver a productos</string>
+    <string name="nuevo_producto">Nuevo Producto</string>
+    <string name="nombre">Nombre</string>
+    <string name="precio">Precio</string>
+    <string name="cantidad">Cantidad</string>
+    <string name="unidad_kg_lt">Unidad (kg, lt)</string>
+    <string name="fecha_yyyy_mm_dd">Fecha (YYYY-MM-DD)</string>
 </resources>

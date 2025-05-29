@@ -1,6 +1,9 @@
 [versions]
 agp = "8.10.0"
+appcompatVersion = "1.4.2"
 browser = "1.8.0"
+cardview = "1.0.0"
+googleMaterial = "1.6.0"
 kotlin = "2.0.21"
 coreKtx = "1.10.1"
 junit = "4.13.2"
@@ -21,7 +24,9 @@ securityCryptoVersion = "1.1.0-alpha07"
 stripeAndroid = "21.14.0"
 
 [libraries]
+androidx-appcompat-v142 = { module = "androidx.appcompat:appcompat", version.ref = "appcompatVersion" }
 androidx-browser = { module = "androidx.browser:browser", version.ref = "browser" }
+androidx-cardview = { module = "androidx.cardview:cardview", version.ref = "cardview" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-security-crypto-v110alpha07 = { module = "androidx.security:security-crypto", version.ref = "securityCryptoVersion" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -41,6 +46,7 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 # Retrofit
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
 material-v1120 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
+material-v160 = { module = "com.google.android.material:material", version.ref = "googleMaterial" }
 retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }

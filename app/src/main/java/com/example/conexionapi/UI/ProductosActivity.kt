@@ -47,7 +47,10 @@ class ProductosActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            title = "Mis Productos" // Mueve el título aquí desde el XML
+        }
     }
 
     private fun setupRecyclerView() {

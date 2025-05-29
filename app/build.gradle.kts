@@ -75,6 +75,16 @@ dependencies {
     implementation (libs.stripe.android)
     implementation (libs.androidx.browser)
     implementation (libs.kotlinx.coroutines.android)
+    implementation (libs.material.v160)
 
+    implementation (libs.material.v1120) // o versión más reciente
+    // Asegúrate de tener también:
+    implementation (libs.androidx.appcompat.v142)
 
+    implementation(libs.androidx.cardview) // o implementation("androidx.cardview:cardview:1.0.0")
+
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.9.0")
+    implementation("androidx.cardview:cardview:1.0.0")
+    implementation("androidx.recyclerview:recyclerview:1.3.0")
 }
